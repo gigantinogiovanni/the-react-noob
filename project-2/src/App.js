@@ -1,5 +1,5 @@
-import React, {useState} from "react"
-
+import React, { useState } from "react";
+import { Container, Button, Form, ListGroup } from "react-bootstrap";
 function App() {
   const [inputval, setinputval] = useState("");
   const [list, setlist] = useState([]);
@@ -8,24 +8,28 @@ function App() {
   }
   function handleAdd(event) {
     event.preventDefault();
-    setinputval("");
-    setlist([...list, inputval]);
+    if (inputval !== "") {
+      setinputval("");
+      setlist([...list, inputval]);  
+    }
   }
   return (
-    <>
+    <Container>
       <h1>TO-DO</h1>
-      <form onSubmit={handleAdd}>
-        <label htmlFor="new-todo">What do you want to add?</label>
-        <input id="new-todo" onChange={handleInput} value={inputval}/>
-        <button>Add item</button>
-      </form>
-      
-      <ul>
-        {
-          list.map((value, key) => <li key={key}>{value}</li>)
-        }
-      </ul>
-    </>
+      <Form onSubmit={handleAdd}>
+        <Form.Group controlId="formBasicEmail">
+          <Form.Label>What do you want to add?</Form.Label>
+          <Form.Control type="todo" placeholder="Enter something to do!" onChange={handleInput} value={inputval}/>
+          <Button variant="primary" type="submit">Add item!</Button>{" "}
+        </Form.Group>
+      </Form>
+
+      <ListGroup>
+        {list.map((value, key) => (
+          <ListGroup.Item key={key}>{value}</ListGroup.Item>
+        ))}
+      </ListGroup>
+    </Container>
   );
 }
 
