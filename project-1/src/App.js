@@ -1,8 +1,8 @@
 import React, {useState} from "react";
+import { Button } from 'react-bootstrap';
 
 export default function App() {
   const [count, setCount] = useState(0);
-
   function handleRemove() {
     if (count > 0) setCount(count - 1);
   }
@@ -17,9 +17,9 @@ export default function App() {
   return (
     <>
       <h1>The current value is: {count}</h1>
-      <button onClick={() => setCount(count + 1)}>Add</button>
-      <button onClick={handleRemove}>Remove</button>
-      <button onClick={handleReset}>Reset</button>
+      <Button variant="success" onClick={() => setCount(count + 1)}>Add</Button>{" "}
+      <Button variant="danger" onClick={handleRemove}>Remove</Button>{" "}
+      <Button variant="secondary" onClick={handleReset}>Reset</Button>
     </>
   );
 }
